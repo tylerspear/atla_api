@@ -44,7 +44,11 @@ app.get('/api', (request, response)=> {
 app.get('/api/:name', (request, response)=> {
     let charName = request.params.name.toLowerCase()
     let found = chars.find(obj => obj.name === charName)
-    response.json(found)
+    if(found){
+        response.json(found)   
+    } else {
+        response.status(404).end()
+    }
 })
 
 app.listen(process.env.PORT || PORT, () => {
